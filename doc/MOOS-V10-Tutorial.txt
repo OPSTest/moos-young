@@ -1,0 +1,24 @@
+1. core-moos-v10维护在git上。
+2. 头文件，源文件和库文件的组织结构：
+   APP/Comms/Utils/Thirdparty/include几个块。
+   头文件的文件夹结构：
+     若源文件在libMOOS/X/file.cpp，则此文件对应的头文件，包含时应写#include "MOOS/libMOOS/X/file.h"
+3. 使用MOOS-V10：
+	当你要使用MOOS-V10时，并且你使用CMAKE构建，那么只需在你的CMakeLists.txt		中加上：
+		find_package(MOOS 10)
+	此时，变量MOOS_INCLUDE_DIRS,MOOS_DEPEND_INCLUDE_DIRS,MOOS_LIBRARYS,MOOS_	DEPEND_LIBRARY都会被赋值。
+	下面是一个在自己的Project中使用MOOS-V10的CMakeLists.txt的例子：
+
+	那 find_package(MOOS 10)是怎样找到MOOS 10的呢，是通过MOOSConfig.cmake(UseMOOS.cmake).
+4.使用CMOOSMsg传送数据，CMOOSMsg是一个包含数据（float,string,binary)的报文，就是所说的“mail”。
+5. MOOSDB就相当于一个中转信息的hub,与之连接的相当于client节点。
+6. 两个通信的类：
+	MOOS::AsyncCommClient(新)和CMOOSCommClient(旧，性能差)，用于Client的获取和发送数据.通过Notify（）函数发送数据。
+7.使用Fetch()函数在自身的comms client中获取最新的mail,注意这不是在MOOSDB中获取，而是在自身。
+8.使用Register()函数向MOOSDB注册/声明你想接收什么信息。
+9.Run（）函数的执行代表通信的开始，在Run()参数中，需要指名MOOSDB运行的计算机的名字（或是IP），端口，本client的名字，以及本client和MOOSDB通信的频率。
+10.SetOnMailCallback():
+	当对Fetch()的处理mail的方式不满意，那么使用上面这个函数可以进行一个快速的处理方式，此时一旦有mail来，就install a callback（callback是指对mail的处理），这是会启动一个线程来处理，而使用Fetch不会启动线程，那么此时如果对mail的处理方式十分长的话就会影响接下来的mail的接收。
+11.AddMessageCallBack():
+	接着上面的问题，如果mail-X的处理时间很长，我们就需要为X自己做一个处理进程，使用上面的函数即可，同样可为X增加多个callback()以增强X处理的实时性。
+	

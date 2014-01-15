@@ -1,0 +1,12 @@
+This example is advanced than ex30 because it new a thread(if you want) when there is a new mail by function AddMessageCallback.
+
+在此基础上，若想部分使用另外的线程而其余的全使用一个线程处理便可以这样：
+Comms.AddMessageCallback("callbackA", "A", funcA, NULL);
+Comms.AddMessageCallback("default", "*", funcDefault, NULL);
+
+同样的任务可以由CMOOSAPP来完成：
+我们只需要定义自己的继承自CMOOSApp的类，然后重新实现下面几个虚函数：
+OnNewMail()--相当于本例子的OnMail()
+OnConnectToServer()--相当于本例子OnConnect()
+Iterate()--相当于本例子中的main（）中的for循环
+                                             ---younghz  2014.1.11
