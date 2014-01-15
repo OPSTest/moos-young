@@ -1,1 +1,0 @@
-/usr/bin/c++       CMakeFiles/ex30.dir/main.cpp.o  -o ex30 -rdynamic /home/jerry/moos-ivp/MOOS/MOOSCore/lib/libMOOS.a -lpthread -lm 
