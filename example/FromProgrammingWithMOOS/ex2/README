@@ -1,0 +1,10 @@
+这个在ex1的基础上增加了对mail处理的详细剖析。
+
+
+Add:
+之前编写了一些自己的app，那么怎样测试这写app呢，方法1：
+
+1.启动MOOSDB进程（MOOSDB &）;
+2.启动uMS进程（uMS &）并连接到MOOSDB，这时MOOSDB上会显示uMS的连接;
+3.启动自己的app的进程，MOOSDB 会显示进程的连接；
+4.ctrl+鼠标左键单机uMS的空行的第一列，添加变量如“Heading”,并赋值，那么在你的App中会收到相关信息。
