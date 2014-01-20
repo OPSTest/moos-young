@@ -1,0 +1,8 @@
+    这个例子主要讲述从.moos文件中读取配置信息，通常所有的进程都共享同一个moos文件。每个进程都在moos文件中自己的配置快中读取信息。
+    解析配置块：
+    MOOSGenLib库包含许多帮助解析任务文件的类和函数，CMOOSApp中有一个叫m_MissionReader的对象，当调用OnStartUp时，这个对象就已经准备就绪使用。
+
+
+
+其他：
+    每个继承自CMOOSApp的进程都会发送名为XXX_STATUS的mail，包含进程的uptime以及订阅和发布的信息。
