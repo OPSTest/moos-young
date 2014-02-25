@@ -1,0 +1,32 @@
+//*******************************************************
+// ShoreSide Configuration File
+
+ServerHost = localhost
+ServerPort = 9000
+Community  = yhz_shoreside
+
+MOOSTimeWarp = 1
+
+LatOrigin  = 43.825300 
+LongOrigin = -70.330400 
+
+  
+//--------------------------------------------------------
+//--------------------------------------------------------
+Processconfig = ANTLER
+{
+  MSBetweenLaunches = 400
+
+  Run = MOOSDB           @ NewConsole = false
+  Run = pMarineViewer    @ NewConsole = false
+  Run = pLogger          @ NewConsole = false
+  Run = uFldHazardSensor @ NewConsole = false
+  Run = uFldHazardMetric @ NewConsole = false
+
+  Run = pShare           @ NewConsole = false
+  Run = pHostInfo        @ NewConsole = false
+  Run = uFldShoreBroker  @ NewConsole = false
+  Run = uFldNodeComms    @ NewConsole = false
+}
+
+//--------------------------------------------------
