@@ -1,0 +1,13 @@
+这个任务是根据m_10所改写，改写了uSimMarine,hazards.txt,pMarineViewer,...
+接下来要做的是增加vehicle数量并能做到更改路径点。
+
+14.2.25 night 10:50
+完成了三个航行器，并通过重写BHV_Waypoint使航行器能够遍历搜索区域。
+
+问题：
+不能狗识别bigine,能识别hazards.??
+
+
+备注：
+通过ctrl+c不能杀掉新增加的yang的所有进程，而没终止进程再次发起进程的话就会出现
+问题。
