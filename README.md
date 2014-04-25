@@ -1,4 +1,4 @@
-## [MOOS-YOUNG](github.com/younghz/moos-young)
+## [MOOS-YOUNG](https://github.com/younghz/moos-young)
 
 ### Introduction
 
@@ -6,7 +6,7 @@
 
 ### Installation
 
-* You can check out the latest source code from GitHub at [https:://github.com/younghz/moos-young](github.com/younghz/moos-young).
+* You can check out the latest source code from GitHub at [https:://github.com/younghz/moos-young](https://github.com/younghz/moos-young).
 * To make use of MOOS-Young, first, you should download MOOS-IvP in MIT site and then install it; second, put this source code in the root file of MOOS-IvP and build it.
 
 ### <i class="icon-file"></i> Documentation
@@ -15,5 +15,5 @@
   
 ### Others
 
-* If you are instreted in what I am doing or you find sth that is technically wrong and in need of correction, please open an issue or mail to " younghaizhi@gmail.com ", I will take a look and reply you as soon as possiable. More info about this repo you can access could be find in my blog -- [blog.csdn.net/u012150179](blog.csdn.net/u012150179) ".
+* If you are instreted in what I am doing or you find sth that is technically wrong and in need of correction, please open an issue or mail to " younghaizhi@gmail.com ", I will take a look and reply you as soon as possiable. More info about this repo you can access could be find in my blog -- [blog.csdn.net/u012150179](https://blog.csdn.net/u012150179) ".
 
