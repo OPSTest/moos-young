@@ -9,7 +9,7 @@
 * You can check out the latest source code from GitHub at [https:://github.com/younghz/moos-young](github.com/younghz/moos-young).
 * To make use of MOOS-Young, first, you should download MOOS-IvP in MIT site and then install it; second, put this source code in the root file of MOOS-IvP and build it.
 
-### Documentation
+### <i class="icon-file></i>"Documentation
 
 * The doc of MOOS-Young is at file 'doc' in this repo, you can access them for more information.
   
