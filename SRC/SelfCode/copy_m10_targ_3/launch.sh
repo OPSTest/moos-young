@@ -36,9 +36,10 @@ fi
 #-------------------------------------------------------
 VNAME1="archie"      # The first   vehicle community
 VNAME2="betty"       # The second  vehicle community
+VNAME3="yang"        # The third   vehicle community
 START_POS1="0,0"  
 START_POS2="0,0"  
-
+SNAME="shoreside"
 
 
 #-------------------------------------------------------
@@ -50,16 +51,17 @@ sleep .25
 printf "Launching $VNAME2 MOOS Community (WARP=%s) \n" $TIME_WARP
 pAntler targ_$VNAME2.moos >& /dev/null &
 sleep .25
-printf "Launching $SNAME MOOS Community (WARP=%s) \n"  $TIME_WARP
+printf "Launching $VNAME3 MOOS Community (WARP=%s) \n"  $TIME_WARP
+pAntler $VNAME3.moos >& /dev/null &
+sleep .25
+printf "Launching $SNAME MOOS Community (WARP=%s) \n" $TIME_WARP
 pAntler targ_shoreside.moos >& /dev/null &
-printf "Launching yang MOOS Community (WARP=%s) \n"  $TIME_WARP
-pAntler yang.moos >& /dev/null &
 printf "Done \n"
 
 uMAC targ_shoreside.moos
 
 printf "Killing all processes ... \n"
-kill %1 %2 %3 
+kill %1 %2 %3 %4
 printf "Done killing processes.   \n"
 
 
