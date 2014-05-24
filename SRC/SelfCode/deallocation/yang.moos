@@ -1,0 +1,241 @@
+//by yhz     14.2.25      add the third vehicle
+
+ServerHost = localhost
+ServerPort = 9003
+Simulator  = true
+
+Community  = yang
+
+MOOSTimeWarp = 1
+LatOrigin  = 42.3584
+LongOrigin = -71.08745
+
+//------------------------------------------------------------
+Processconfig = ANTLER
+{
+  MSBetweenLaunches = 100
+   
+  Run = MOOSDB             @ NewConsole = false
+  Run = uSimMarine         @ NewConsole = false
+  Run = pLogger            @ NewConsole = false
+  Run = pNodeReporter      @ NewConsole = false
+  Run = pMarinePID         @ NewConsole = false
+  Run = pHelmIvP           @ NewConsole = false
+  Run = uProcessWatch      @ NewConsole = true 
+
+  Run = pShare             @ NewConsole = false
+  Run = pHostInfo          @ NewConsole = false
+  Run = uFldNodeBroker     @ NewConsole = false
+  Run = uFldMessageHandler @ NewConsole = false
+  Run = uFldHazardMgr      @ NewConsole = false 
+}
+
+//--------------------------------------------------
+// uFldNodeBroker configuration block from plugin
+
+ProcessConfig = uFldNodeBroker
+{
+  AppTick   = 1
+  CommsTick = 1
+
+  TRY_SHORE_HOST = pshare_route=multicast_9
+
+  BRIDGE = src=VIEW_POLYGON
+  BRIDGE = src=VIEW_POINT
+  BRIDGE = src=VIEW_SEGLIST
+  BRIDGE = src=APPCAST
+  BRIDGE = src=UHZ_CLASSIFY_REQUEST
+  BRIDGE = src=UHZ_SENSOR_REQUEST
+  BRIDGE = src=UHZ_CONFIG_REQUEST
+  BRIDGE = src=HAZARDSET_REPORT
+  BRIDGE = src=NODE_REPORT_LOCAL,  alias=NODE_REPORT
+  BRIDGE = src=NODE_MESSAGE_LOCAL, alias=NODE_MESSAGE
+}
+
+//---------------------------------------------------------
+// pShare Config Block  (Created from Plugin)
+
+ProcessConfig = pShare
+{
+  AppTick    = 2
+  CommsTick  = 2
+
+  input = route =  localhost:9303
+
+}
+
+//--------------------------------------------------
+// pHostInfo configuration block from plugin
+
+ProcessConfig = pHostInfo
+{
+  AppTick 	= 1
+  CommsTick 	= 1
+
+  DEFAULT_HOSTIP = localhost
+}
+
+
+//--------------------------------------------------
+// uFldMessageHandler configuration block from plugin
+
+ProcessConfig = uFldMessageHandler
+{
+  AppTick   = 3
+  CommsTick = 3
+
+  STRICT_ADDRESSING = false
+}
+
+//--------------------------------------------------
+// uFldHazardMgr configuration block from plugin
+
+ProcessConfig = uFldHazardMgr
+{
+  AppTick   = 2
+  CommsTick = 2
+
+  swath_width = 30
+  sensor_pd   = 0.86
+  report_name = yang
+}
+
+//------------------------------------------------------
+// uSimMarine Configuration Block  (Created from plugin)
+
+ProcessConfig = uSimMarine
+{
+  AppTick   = 10
+  CommsTick = 10
+
+  //START_POS = 0,0, 180, 0          //by yhz 14.2.25  --
+  start_x       = -40                //by yhz 14.2.25  ++
+  start_y       = -460               //by yhz 14.2.25  ++
+  start_speed   = 0
+  start_heading = 45
+
+  PREFIX    = NAV
+
+  BUOYANCY_RATE    = 0.025
+  MAX_DEPTH_RATE = 0.5
+  MAX_DEPTH_RATE_SPEED = 2.0
+  //将速度增大2倍
+  //thrust_map    = 0:0, 20:2, 40:4, 60:6, 80:8, 100:10
+}
+
+//----------------------------------------------------
+// pHelmIvP Configuration Block  (Created from Plugin)
+
+ProcessConfig = pHelmIvP
+{
+  AppTick    = 2
+  CommsTick  = 2
+  
+  Behaviors    = yang.bhv  
+  Verbose      = false
+  Domain       = course:0:359:360
+  Domain       = speed:0:5:26
+
+  Domain       = depth:0:10:101
+
+}
+
+//-----------------------------------------------------
+// pMarinePID Configuration Block (created from plugin)
+
+ProcessConfig = pMarinePID
+{
+  AppTick    = 10
+  CommsTick  = 10
+  
+  VERBOSE       = true
+  DEPTH_CONTROL = false
+  ACTIVE_START  = true
+  
+  // Yaw PID controller
+  YAW_PID_KP             = 0.4
+  YAW_PID_KD             = 0.1
+  YAW_PID_KI             = 0.0
+  YAW_PID_INTEGRAL_LIMIT = 0.07
+  
+  // Speed PID controller
+  SPEED_PID_KP           = 1.0
+  SPEED_PID_KD           = 0.0
+  SPEED_PID_KI           = 0.0
+  SPEED_PID_INTEGRAL_LIMIT = 0.07
+  
+  //Pitch PID controller
+  PITCH_PID_KP                   = 0.5
+  PITCH_PID_KD                   = 1.0
+  PITCH_PID_KI                   = 0
+  PITCH_PID_INTEGRAL_LIMIT       = 0
+
+  //ZPID controller
+  Z_TO_PITCH_PID_KP              = 0.12
+  Z_TO_PITCH_PID_KD              = 0
+  Z_TO_PITCH_PID_KI              = 0.004
+  Z_TO_PITCH_PID_INTEGRAL_LIMIT  = 0.05
+
+  MAXPITCH     = 15
+  MAXELEVATOR  = 13
+
+  // Maximums
+  MAXRUDDER  = 100
+  MAXTHRUST  = 100
+  
+  // A non-zero SPEED_FACTOR overrides use of SPEED_PID
+  // Will set DESIRED_THRUST = DESIRED_SPEED * SPEED_FACTOR
+  SPEED_FACTOR = 20
+}
+
+//--------------------------------------------------
+// pLogger Configuration Block (Created from Plugin)
+
+ProcessConfig = pLogger
+{
+  AppTick 	= 5
+  CommsTick 	= 5
+  
+  File		= LOG_YANG
+  PATH		= ./
+  SyncLog 	= true @ 0.2
+  AsyncLog 	= true
+  FileTimeStamp = true
+
+  Log = IVPHELM_LIFE_EVENT @ 0 nosync
+
+  // Log it all!!!!!
+  WildCardLogging = true 
+  WildCardOmitPattern = *_STATUS
+  LogAuxSrc = true
+}
+
+ProcessConfig = pNodeReporter
+{
+  AppTick     = 2
+  CommsTick   = 2
+  
+  VESSEL_TYPE = UUV
+}
+
+//--------------------------------------------------------
+// uProcessWatch Configuration Block (Created from Plugin)
+
+ProcessConfig = uProcessWatch
+{
+  AppTick   = 2
+  CommsTick = 2
+  
+  NOWATCH = uXMS*
+
+  WATCH_ALL = true
+
+  WATCH  = uSimMarine
+  WATCH  = pShare*
+  WATCH  = pLogger
+  WATCH  = pNodeReporter
+  WATCH  = pMarinePID
+  WATCH  = pHelmIvP
+}
+
+
