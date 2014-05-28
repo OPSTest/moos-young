@@ -78,13 +78,13 @@ SHORESIDE="shoreside"
 
 printf "发起MOOS进程(community)--$VEHICLE1... (WARP=%s)\n"  $TIME_WARP
 pAntler $VEHICLE1.moos >& /dev/null &
-sleep .25
+sleep 0.25
 printf "发起MOOS进程(community)--$VEHICLE2... (WARP=%s)\n"   $TIME_WARP
 pAntler $VEHICLE2.moos >& /dev/null &
-sleep .25
+sleep 0.25
 printf "发起MOOS进程(community)--$VEHICLE3... (WARP=%s)\n"    $TIME_WARP
 pAntler $VEHICLE3.moos >& /dev/null &
-sleep .25
+sleep 0.25
 printf "发起MOOS进程(community)--$SHORESIDE... (WARP=%s)\n"  $TIME_WARP
 pAntler $SHORESIDE.moos >& /dev/null &
 printf "完事。\n"
