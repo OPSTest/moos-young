@@ -15,7 +15,7 @@ LongOrigin = -71.08745
 //--------------------------------------------------------
 Processconfig = ANTLER
 {
-  MSBetweenLaunches = 400
+  MSBetweenLaunches = 100 
 
   Run = MOOSDB           @ NewConsole = false
   Run = pMarineViewer    @ NewConsole = false

@@ -221,16 +221,25 @@ ProcessConfig = pNodeReporter
 //--------------------------------------------------------
 // uProcessWatch Configuration Block (Created from Plugin)
 
+//14.5.24
+//uprocessWatch作为监视各个运行的application状态的一个应用，
+//可以在每个community中都使用以便监视这个community中的使用
+//的application的状态。
+
+//其中的*等符号是正则表达式，如*通配。
+
 ProcessConfig = uProcessWatch
 {
   AppTick   = 2
   CommsTick = 2
   
+  //nowatch代表不监视某个进程
   NOWATCH = uXMS*
 
   WATCH_ALL = true
 
   WATCH  = uSimMarine
+  //监视所有以pShare开头的application
   WATCH  = pShare*
   WATCH  = pLogger
   WATCH  = pNodeReporter
