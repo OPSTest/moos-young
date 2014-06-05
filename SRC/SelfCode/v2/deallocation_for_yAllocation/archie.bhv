@@ -27,7 +27,7 @@ Behavior = BHV_Waypoint
           lead = 15
 
   //增加updates参数
-  updates = ALLOCATION_UPDATES
+  updates = ALLOCATION_UPDATES_ARCHIE
 
   visual_hints = vertex_color=yellow, edge_color=green
 
