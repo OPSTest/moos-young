@@ -29,7 +29,7 @@ Behavior = BHV_Waypoint
           lead = 15
 
   //增加updates参数
-  updates = ALLOCATION_UPDATES
+  updates = ALLOCATION_UPDATES_BETTY
 
   visual_hints = vertex_color=yellow, edge_color=gray25
        endflag = NODE_MESSAGE = src_node=betty,dest_node=all,var_name=SURVEY,string_val=COMPLETE
