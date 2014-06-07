@@ -27,6 +27,9 @@ Processconfig = ANTLER
   Run = pHostInfo        @ NewConsole = false
   Run = uFldShoreBroker  @ NewConsole = false
   Run = uFldNodeComms    @ NewConsole = false
+
+  //14.5.29
+  Run = yGlobalInformation    @ NewConsole = true
 }
 
 //--------------------------------------------------
@@ -106,6 +109,12 @@ ProcessConfig = uFldShoreBroker
   //qbrige的方式设置了别名DEPLOY和RETURN，见上方的Note注释块。而REQ_REPORT发送的HZAARDSET_REQUEST_ALL在上一行中设置成为了HAZARDSET_REQUEST
   //这个信息会以endflag形式在bhv文件中发送。
   bridge   = src=SIM_FAULT,       alias=FAULT
+
+  //向航行器发送所有航行器位置点信息 14.5.28
+  bridge = src=YANG_WPT_CURRENT_INDEX, alias=YANG_WPT_CURRENT_INDEX_YANG
+  bridge = src=BETTY_WPT_CURRENT_INDEX, alias=BETTY_WPT_CURRENT_INDEX_BETTY
+  bridge = src=ARCHIE_WPT_CURRENT_INDEX, alias=ARCHIE_WPT_CURRENT_INDEX_ARCHIE
+
 }
 
 //--------------------------------------------------
