@@ -30,7 +30,7 @@ Behavior = BHV_Waypoint
           lead = 15
 
   //增加updates参数 14.5.27
-  updates = ALLOCATION_UPDATES
+  updates = ALLOCATION_UPDATES_YANG
 
   visual_hints = vertex_color=yellow, edge_color=red
   endflag = NODE_MESSAGE = src_node=yang,dest_node=all,var_name=SURVEY,string_val=COMPLETE

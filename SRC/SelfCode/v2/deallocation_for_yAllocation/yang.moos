@@ -53,6 +53,9 @@ ProcessConfig = uFldNodeBroker
   BRIDGE = src=HAZARDSET_REPORT
   BRIDGE = src=NODE_REPORT_LOCAL,  alias=NODE_REPORT
   BRIDGE = src=NODE_MESSAGE_LOCAL, alias=NODE_MESSAGE
+
+  //  航行器位置点信息
+  BRIDGE = src=WPT_INDEX, alias=YANG_WPT_INDEX
 }
 
 //---------------------------------------------------------
