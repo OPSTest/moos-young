@@ -22,12 +22,15 @@
 ***
 14.5.26   
 关于单航行器内部和多航行器之间通信问题整理：
-+单航行器：
++ 单航行器：   
+
 >对于单航行器，航行器中运行的各个application之间的通信方式正是MOOS的精髓，编码方式可见《Introduction to programming with MOOS》。      
-+多航行器：
->对于多航行器，一般是通过uField Toolbox的工具完成的：
->>+pHostInfo:这个在shoreside和vehicle端都存在，主要检测涉及到通信的IP，端口等相关信息。
->>+uFldNodeBroker:只在vehicle上运行，用作与shoreside之间建立连接。
->>+uFldShoreBroker:只在shoreside上运行，从航行器处获取信息。还有一个作用就是**使航行器能够识别用户在shoreside端所定义的变量**。比如定义的按钮FAULT变量。
->>+uFldMessageHandler:上面的工具是接受与发送，这个工具是处理信息。
->>+uFldNodeComms:这个才是各个航行器之间能够通信的工具。它运行在shoreside端。它作为中间人接收vehicle端发送的信息并有条件的将信息发送出去。
++ 多航行器：   
+
+>对于多航行器，一般是通过uField Toolbox的工具完成的：    
+
+>>+ pHostInfo:这个在shoreside和vehicle端都存在，主要检测涉及到通信的IP，端口等相关信息。
+>>+ uFldNodeBroker:只在vehicle上运行，用作与shoreside之间建立连接。
+>>+ uFldShoreBroker:只在shoreside上运行，从航行器处获取信息。还有一个作用就是**使航行器能够识别用户在shoreside端所定义的变量**。比如定义的按钮FAULT变量。
+>>+ uFldMessageHandler:上面的工具是接受与发送，这个工具是处理信息。
+>>+ uFldNodeComms:这个才是各个航行器之间能够通信的工具。它运行在shoreside端。它作为中间人接收vehicle端发送的信息并有条件的将信息发送出去。
