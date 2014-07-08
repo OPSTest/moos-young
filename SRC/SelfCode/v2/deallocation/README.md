@@ -24,7 +24,8 @@
 关于单航行器内部和多航行器之间通信问题整理：
 + 单航行器：   
 
->对于单航行器，航行器中运行的各个application之间的通信方式正是MOOS的精髓，编码方式可见《Introduction to programming with MOOS》。      
+>对于单航行器，航行器中运行的各个application之间的通信方式正是MOOS的精髓，编码方式可见《Introduction to programming with MOOS》。   
+
 + 多航行器：   
 
 >对于多航行器，一般是通过uField Toolbox的工具完成的：    
