@@ -1,5 +1,7 @@
 ## [MOOS-YOUNG](https://github.com/younghz/moos-young)
 
+### Author :  [younghz](github.com/younghz)
+
 ### Introduction
 
 * This is the extension of MOOS and MOOS-IvP, it's focus on the coordination of distributed multiple Underwater Unmanned Vechicles in MCM mission. 
