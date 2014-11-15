@@ -73,12 +73,12 @@ bool CAllocation::OnNewMail(MOOSMSG_LIST &NewMail)
                     //                    方式1
                     //  按照reldist划分区域，按照cost确定访问路径点顺序
                     //********************************************************
-//                    childRegion(&(instace_vehicle_point_vector->vector_points_yang),
-//                                &(instace_vehicle_point_vector->vector_points_betty),
-//                                &(instace_vehicle_point_vector->vector_points_archie));
+                    //childRegion(&(instace_vehicle_point_vector->vector_points_yang),
+                    //              &(instace_vehicle_point_vector->vector_points_betty),
+                    //              &(instace_vehicle_point_vector->vector_points_archie));
 
-//                    //接下来就是Notify变量ALLOCATION_UPDATES
-//                    Notify("ALLOCATION_UPDATES_YANG", notifyString(&(vector_point_and_cost_yang)));
+                    //接下来就是Notify变量ALLOCATION_UPDATES
+                    //Notify("ALLOCATION_UPDATES_YANG", notifyString(&(vector_point_and_cost_yang)));
 
 
                     //********************************************************
@@ -87,7 +87,7 @@ bool CAllocation::OnNewMail(MOOSMSG_LIST &NewMail)
                     //********************************************************
                     //输出
                     cout << "**********************************************************************" << endl;
-                    cout << "After deallocation and sorting:" << endl << endl;
+                    cout << "After deallocation:" << endl << endl;
                     cout << "(250,-400),(300,-400),(350,-400),(350,-350),(350,-300),(350,-250),(350,-200)"
                             "(350,-150),(350,-100),(350,-50),(300,-50),(300,-100),(300,-150),(300,-200),(300,-250)"
                             "(300,-300),(300,-350),(250,-350),(250,-300),(250,-250),(200,-250),(200,-300),(200,-350),"
@@ -280,7 +280,7 @@ bool CAllocation::OnStartUp()
 
     // 尝试使用中文，但是会乱码
     MOOSTrace("*********************\n");
-    MOOSTrace("author:younghz!!!!\n");
+    MOOSTrace("author:yang haizhi!!!!\n");
     //在xtrem中显示当前航行器是哪个
     cout << "community: " << m_host_community << endl;
     MOOSTrace("*********************\n");

@@ -1,15 +1,13 @@
-/*****************************************************************/
-/*author : younghz                                               */
-/*date   : 14.5.25                                               */
-/*project: moos-young/deallocation                               */
-/*brief  : 首先通过计算PointAndCost中点的rel_dist执行子区域的划分  */
-/*         然后根据计算的cost值执行路径点的排序（但是对于这里，得到 */
-/*         的结果不）是很理想，具具体分析见父文件夹下README.md中    */
-/*         14.6.5部分的分析。对于解决方式可按照TSP方式（曾做过的按照*/
-/*         模拟退火解决TSP问题可以用到这里），因为之前已经执行了子区域*/
-/*         划分，所以这时就相当于单航行器的TSP问题。                 */
-/******************************************************************/
-
+/*****************************************************************
+author : younghz
+date   : 14.5.25
+project: moos-young/deallocation
+brief  : 首先通过计算PointAndCost中点的rel_dist执行子区域的划分
+         然后根据计算的cost值执行路径点的排序（但是对于这里，得到
+         的结果不）是很理想，具具体分析见父文件夹下README.md中
+         14.6.5部分的分析。对于解决方式可按照TSP方式因为之前已
+         经执行了子区划分，所以这时就相当于单航行器的TSP问题。
+******************************************************************/
 
 #ifndef ALLOCATIONH
 #define ALLOCATIONH
@@ -20,7 +18,6 @@
 #include <vector>
 #include <map>
 #include <string>
-
 
 //新结构
 struct PointAndCost
@@ -55,7 +52,7 @@ public:
     bool Iterate();
 
 private:
-    VehiclePointVector *instace_vehicle_point_vector;
+    VehiclePointVector* instace_vehicle_point_vector;
 
     //航行器最新经过的点的位置
     PointYoughz yang_current_point, betty_current_point, archie_current_point;
@@ -81,7 +78,7 @@ private:
     std::string convertDouble(double value);
 
 protected:
-
+    //No protected members
 };
 
 #endif

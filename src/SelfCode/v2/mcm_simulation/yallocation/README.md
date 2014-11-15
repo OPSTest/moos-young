@@ -10,7 +10,7 @@
 建立application并应用的原理与流程：
 >+根目录和src目录下的CMakeLists.txt的编写。主要是为了使用库以及生成所需的app（也就是可执行文件）。
 >+按照MOOS框架编写app程序，对于5.27所述功能，需要的是注册变量FAULT，在iterate中去接收变量的发送并做相应的处理（这里是发送notify相应的updates对应信息）
->+编写完成后在build文件夹下`cmake ..`,然后`make`，然后在build下的bin文件夹下找到生成的可执行文件放到moos-ivp/bin下。在.moos配置文件中将工具加入即可运行，当然.moos中还要进行updates等一系列的配置。
+>+编写完成后在build文件夹下`cmake ..`(若出现问题，现将此文件夹清空),然后`make`，然后在build下的bin文件夹下找到生成的可执行文件放到moos-ivp/bin下。在.moos配置文件中将工具加入即可运行，当然.moos中还要进行updates等一系列的配置。
 
 ***
 14.6.5
