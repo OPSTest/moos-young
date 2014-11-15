@@ -1,7 +1,7 @@
 #----------------------------------------------------------------
-#name:    launch.sh 
+#name:    launch.sh
 #project: moos-young
-#brief:   启动各个community，包含三个航行器和一个shoreside. 
+#brief:   启动各个community，包含三个航行器和一个shoreside.
 #date:    14.5.13
 #author:  younghz
 #----------------------------------------------------------------
@@ -17,7 +17,7 @@ HAZARD_FILE="hazards.txt"
 ARGS=`getopt -o hyt:H: --long help-long,younghz-long,timewarp-long:,hazardsfile-long: -- "$@"`
 
 if [ $? != 0 ]; then
-    echo "Terminating..." >&2 
+    echo "Terminating..." >&2
     exit 1
 fi
 
@@ -29,12 +29,12 @@ eval set -- "$ARGS"
 while true
 do
     case "$1" in
-    -h|--help-long)  
+    -h|--help-long)
 	printf "这里提供了四个参数，分别是：    \n"
 	printf "'-y'或'--younghz'          \n"
         printf "'-h'或'--help'             \n"
         printf "'-t'或'--timewarp'         \n"
-	printf "'--hazardsfile'            \n" 
+	printf "'--hazardsfile'            \n"
         shift
         ;;
     -y|--younghz-long)
@@ -110,7 +110,7 @@ do
 done
 
 if [ "$INPUT" = "q" -o "$INPUT" = "2" ];then
-    printf "杀掉所有进程...\n"
+    printf "结束所有MOOS community...\n"
     kill %1 %2 %3 %4
     printf "本次仿真就此结束，生成的LOG及相关信息都在任务文件夹下。可使用相关工具执行此次任务分析。\n"
 fi

@@ -30,28 +30,28 @@ eval set -- "$ARGS"
 while true
 do
     case "$1" in
-    -h|--help-long)  
-	printf "这里提供了两个参数，分别是：    \n"
-	printf "'-v'或'--verbose'          \n"
+    -h|--help-long)
+    printf "这里提供了两个参数，分别是：    \n"
+    printf "'-v'或'--verbose'          \n"
         printf "'-h'或'--help'             \n"
         shift
         ;;
     -v|--verbose-long)  
-	VERBOSE="-v"
-	shift
-	;;
+    VERBOSE="-v"
+    shift
+    ;;
     -y|--younghz-long)
-	printf "github.com/younghz\n"
-	shift
-	;;
+    printf "github.com/younghz\n"
+    shift
+    ;;
     --)
-	shift
-	break
-	;;
+    shift
+    break
+    ;;
     *)
-	printf "错误参数\n"
-	exit 1
-	;;
+    printf "错误参数\n"
+    exit 1
+    ;;
     esac
 done
 
@@ -64,4 +64,4 @@ rm -rf $VERBOSE LOG_*
 rm -f  $VERBOSE *~
 rm -f  $VERBOSE .LastOpenedMOOSLogDirectory
 
-	    
+
