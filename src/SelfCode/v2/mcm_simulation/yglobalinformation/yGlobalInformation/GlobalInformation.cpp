@@ -76,7 +76,7 @@ bool CGlobalInformation::OnStartUp()
 
     // 尝试使用中文，但是会乱码
     MOOSTrace("********************\n");
-    MOOSTrace("author:younghz!!!!\n");
+    MOOSTrace("GloableInfomation application. By yang haizhi.\n");
     cout << "community: " << m_host_community << endl;
     MOOSTrace("********************\n");
 
