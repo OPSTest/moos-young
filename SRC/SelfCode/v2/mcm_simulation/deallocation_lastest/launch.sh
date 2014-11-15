@@ -61,7 +61,7 @@ do
 	break
 	;;
     *)
-	printf "错误参数,检查\n"
+	printf "错误参数，检查\n"
 	exit 1
 	;;
     esac
@@ -76,18 +76,26 @@ VEHICLE2="betty"
 VEHICLE3="yang"
 SHORESIDE="shoreside"
 
-printf "发起MOOS进程(community)--$VEHICLE1... (WARP=%s)\n"  $TIME_WARP
+printf "*************************************************\n"
+printf "\n"
+printf "       多无人水下航行器系统MCM任务仿真\n"
+printf "By 'yang haizhi' with the help of MOOS & MOOS-IvP.\n"
+printf "\n"
+printf "*************************************************\n"
+
+printf "\n"
+printf "发起MOOS community--$VEHICLE1... (WARP=%s)\n"  $TIME_WARP
 pAntler $VEHICLE1.moos >& /dev/null &
 sleep 0.25
-printf "发起MOOS进程(community)--$VEHICLE2... (WARP=%s)\n"   $TIME_WARP
+printf "发起MOOS community--$VEHICLE2... (WARP=%s)\n"   $TIME_WARP
 pAntler $VEHICLE2.moos >& /dev/null &
 sleep 0.25
-printf "发起MOOS进程(community)--$VEHICLE3... (WARP=%s)\n"    $TIME_WARP
+printf "发起MOOS community--$VEHICLE3... (WARP=%s)\n"    $TIME_WARP
 pAntler $VEHICLE3.moos >& /dev/null &
 sleep 0.25
-printf "发起MOOS进程(community)--$SHORESIDE... (WARP=%s)\n"  $TIME_WARP
+printf "发起MOOS community--$SHORESIDE... (WARP=%s)\n"  $TIME_WARP
 pAntler $SHORESIDE.moos >& /dev/null &
-printf "完事。\n"
+printf "\n仿真就绪。\n"
 
 uMAC shoreside.moos >& /dev/null &
 #-----------------------------------------------------------
@@ -96,7 +104,7 @@ uMAC shoreside.moos >& /dev/null &
 INPUT="0"
 while [ "$INPUT" != "2" -a "$INPUT" != "q" ];
 do
-    printf "点击'q'退出结束仿真\n"
+    printf "\n点击'q'退出结束仿真\n"
     printf "> "
     read INPUT
 done
@@ -104,5 +112,5 @@ done
 if [ "$INPUT" = "q" -o "$INPUT" = "2" ];then
     printf "杀掉所有进程...\n"
     kill %1 %2 %3 %4
-    printf "本次仿真就此结束，生成的LOG及相关信息都在任务文件夹下。完事。\n"
+    printf "本次仿真就此结束，生成的LOG及相关信息都在任务文件夹下。可使用相关工具执行此次任务分析。\n"
 fi
