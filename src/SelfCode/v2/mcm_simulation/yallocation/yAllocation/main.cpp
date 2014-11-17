@@ -3,7 +3,7 @@
 int main(int argc, char* argv[])
 {
     const char* sMissionFile = "yAllocation.moos";
-    
+
     const char* sMOOSName = "Allocation";
 
     switch(argc)
@@ -12,12 +12,11 @@ int main(int argc, char* argv[])
         sMOOSName = argv[2];
 
     case 2:
-	sMissionFile = argv[1];
+        sMissionFile = argv[1];
 
     }
 
     CAllocation TheApp;
-
     TheApp.Run(sMOOSName, sMissionFile);
 
     return 0;

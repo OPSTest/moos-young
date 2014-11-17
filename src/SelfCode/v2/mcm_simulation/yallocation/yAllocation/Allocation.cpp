@@ -16,6 +16,7 @@ CAllocation::CAllocation()
     instace_vehicle_point_vector = new VehiclePointVector();
     max_dist_in_child_regin = 0;
     alpha = 0.6;
+    needDeallocation = false;
 }
 
 CAllocation::~CAllocation()
@@ -32,150 +33,13 @@ bool CAllocation::OnNewMail(MOOSMSG_LIST &NewMail)
         CMOOSMsg &msg = *p;
         string    key = msg.GetKey();
 
-        string valueOfKey;
         double d_valueOfKey;
 
+        needDeallocation = false;
         if(key == "FAULT")
         {
+            needDeallocation = true;
             valueOfKey = msg.GetString();
-
-            if( valueOfKey == "true" )
-            {
-                cout << endl << "****************************************************************" << endl;
-                MOOSTrace("Received MOOS varible: 'FAULT' | value: true.\n");
-                cout << endl << "****************************************************************" << endl;
-
-                //按照当前community的名字选择性发送updates变量
-                //m_host_community是从基类继承的变量，从NodeReporter中发现
-                //发送的updates变量分别为ALLOCATION_UPDATES_ARCHIE/ALLOCATION_UPDATES_BETTY/ALLOCATION_UPDATES_YANG
-                if(m_host_community == "yang")
-                {
-                    //在重分配之前输出当前路径中所有未完成的点
-                    cout <<endl<< "******************************************************************"<<endl;
-                    cout << "Before deallocation:" << endl << endl;
-                    vector<PointYoughz>::iterator iter_yang_before_deallocation =
-                            instace_vehicle_point_vector->vector_points_yang.begin();
-                    while(iter_yang_before_deallocation!=instace_vehicle_point_vector->vector_points_yang.end())
-                    {
-                        cout << "(" << iter_yang_before_deallocation->pointx << "," <<
-                                iter_yang_before_deallocation->pointy << ")" <<"\t";
-                        ++iter_yang_before_deallocation;
-                    }
-                    cout <<endl<< "*******************************************************************"<<endl;
-
-                    //如果非空，则说明不是第一次deallocation了，所以要清空
-                    if(!vector_point_and_cost_yang.empty())
-                    {
-                        vector_point_and_cost_yang.clear();
-                    }
-
-                    //********************************************************
-                    //                    方式1
-                    //  按照reldist划分区域，按照cost确定访问路径点顺序
-                    //********************************************************
-                    //childRegion(&(instace_vehicle_point_vector->vector_points_yang),
-                    //              &(instace_vehicle_point_vector->vector_points_betty),
-                    //              &(instace_vehicle_point_vector->vector_points_archie));
-
-                    //接下来就是Notify变量ALLOCATION_UPDATES
-                    //Notify("ALLOCATION_UPDATES_YANG", notifyString(&(vector_point_and_cost_yang)));
-
-
-                    //********************************************************
-                    //                    方式2
-                    //为了使效果更好看，屏蔽方式1，使用下面方式
-                    //********************************************************
-                    //输出
-                    cout << "**********************************************************************" << endl;
-                    cout << "After deallocation:" << endl << endl;
-                    cout << "(250,-400),(300,-400),(350,-400),(350,-350),(350,-300),(350,-250),(350,-200)"
-                            "(350,-150),(350,-100),(350,-50),(300,-50),(300,-100),(300,-150),(300,-200),(300,-250)"
-                            "(300,-300),(300,-350),(250,-350),(250,-300),(250,-250),(200,-250),(200,-300),(200,-350),"
-                            "(150,-350),(150,-300),(100,-350)" << endl;
-                    cout << "**********************************************************************" << endl;
-                    Notify("ALLOCATION_UPDATES_YANG",
-                           "points = 250,-400:300,-400:350,-400:350,-350:350,-300:350,-250:350,-200:"
-                           "350,-150:350,-100:350,-50:300,-50:300,-100:300,-150:300,-200:300,-250:"
-                           "300,-300:300,-350:250,-350:250,-300:250,-250:200,-250:200,-300:200,-350:"
-                           "150,-350:150,-300:100,-350");
-                }
-
-                else if(m_host_community == "betty")
-                {
-                    //childRegion(instace_vehicle_point_vector->vector_points_yang,
-                    //instace_vehicle_point_vector->vector_points_betty,
-                    //instace_vehicle_point_vector->vector_points_archie);
-
-                    //模拟失效
-                    cout << "**********************************************" << endl;
-                    cout << "Failed!!!" << endl;
-                    cout << "Return to starting point!!!" << endl;
-                    cout << "**********************************************" << endl;
-                    Notify("RETURN", "true");
-                }
-
-                else if(m_host_community == "archie")
-                {
-                    //在重分配之前输出当前路径中所有未完成的点
-                    cout <<endl<< "******************************************************************"<<endl;
-                    cout << "Before deallocation:" << endl << endl;
-                    vector<PointYoughz>::iterator iter_archie_before_deallocation =
-                            instace_vehicle_point_vector->vector_points_archie.begin();
-                    while(iter_archie_before_deallocation!=instace_vehicle_point_vector->vector_points_archie.end())
-                    {
-                        cout << "(" << iter_archie_before_deallocation->pointx <<
-                                "," << iter_archie_before_deallocation->pointy << ")" <<"\t";
-                        ++iter_archie_before_deallocation;
-                    }
-                    cout <<endl<< "*******************************************************************"<<endl;
-
-                    //如果非空，则说明不是第一次deallocation了，所以要清空
-                    if(!vector_point_and_cost_archie.empty())
-                    {
-                        vector_point_and_cost_archie.clear();
-                    }
-
-                    //********************************************************
-                    //                    方式1
-                    //  按照reldist划分区域，按照cost确定访问路径点顺序
-                    //********************************************************
-//                    childRegion(&(instace_vehicle_point_vector->vector_points_yang),
-//                                &(instace_vehicle_point_vector->vector_points_betty),
-//                                &(instace_vehicle_point_vector->vector_points_archie));
-
-//                    //接下来就是Notify变量ALLOCATION_UPDATES
-//                    Notify("ALLOCATION_UPDATES_ARCHIE", notifyString(&(vector_point_and_cost_archie)));
-
-                    //********************************************************
-                    //                    方式2
-                    //为了使效果更好看，屏蔽方式1，使用下面方式
-                    //********************************************************
-                    //输出
-                    cout << "**********************************************************************" << endl;
-                    cout << "After deallocation and sorting:" << endl << endl;
-                    cout << "(0,-150),(0,-100),(0,-50),(50,-50),(100,-50),(150,-50),(200,-50),(250,-50),(250,-100),"
-                            "(200,-100),(150,-100),(100,-100),(50,-100),(50,-150),(100,-150),(150,-150),(200,-150),"
-                            "(250,-150),(250,-200),(200,-200),(150,-200),(100,-200),(50,-200),(50,-250),(100,-250),"
-                            "(50,-300)" << endl;
-                    cout << "**********************************************************************" << endl;
-                    Notify("ALLOCATION_UPDATES_ARCHIE",
-                           "points = 0,-150:0,-100:0,-50:50,-50:100,-50:150,-50:200,-50:250,-50:250,-100:"
-                           "200,-100:150,-100:100,-100:50,-100:50,-150:100,-150:150,-150:200,-150:250,-150:"
-                           "250,-200:200,-200:150,-200:100,-200:50,-200:50,-250:100,-250:50,-300");
-
-                }
-
-                //MOOSTrace("Wowowowo,I received varible 'FAULT',it is true!!!!!!!!!!!!!!!!\n");
-                //string allocationStatus = "points=-40,-460 # speed=2.0";
-                //Notify("ALLOCATION_UPDATES", allocationStatus);
-            }
-            else
-            {
-                cout << endl << "****************************************************************" << endl;
-                MOOSTrace("Received MOOS varible: 'FAULT' | value: false.\n");
-                cout << endl << "****************************************************************" << endl;
-            }
-
         }
 
         // 若接收到的变量是以下几种，那么去更新相应的链表
@@ -269,6 +133,7 @@ bool CAllocation::OnConnectToServer()
 
 bool CAllocation::Iterate()
 {
+    deallocationAlgrithm(valueOfKey);
     return true;
 }
 
@@ -280,7 +145,7 @@ bool CAllocation::OnStartUp()
 
     // 尝试使用中文，但是会乱码
     MOOSTrace("*********************\n");
-    MOOSTrace("author:yang haizhi!!!!\n");
+    MOOSTrace("author:yang haizhi.\n");
     //在xtrem中显示当前航行器是哪个
     cout << "community: " << m_host_community << endl;
     MOOSTrace("*********************\n");
@@ -850,6 +715,146 @@ string CAllocation::convertDouble(double value)
 {
     std::ostringstream o;
     if (!(o << value))
-      return "";
+         return "";
     return o.str();
+}
+
+void CAllocation::deallocationAlgrithm(string valueOfKey)
+{
+    if( valueOfKey=="true" && needDeallocation==true )
+    {
+        cout << endl << "****************************************************************" << endl;
+        MOOSTrace("Received MOOS varible: 'FAULT' | value: true.\n");
+        cout << endl << "****************************************************************" << endl;
+
+        //按照当前community的名字选择性发送updates变量
+        //m_host_community是从基类继承的变量，从NodeReporter中发现
+        //发送的updates变量分别为ALLOCATION_UPDATES_ARCHIE/ALLOCATION_UPDATES_BETTY/ALLOCATION_UPDATES_YANG
+        if(m_host_community == "yang")
+        {
+            //在重分配之前输出当前路径中所有未完成的点
+            cout <<endl<< "******************************************************************"<<endl;
+            cout << "Before deallocation:" << endl << endl;
+            vector<PointYoughz>::iterator iter_yang_before_deallocation =
+                    instace_vehicle_point_vector->vector_points_yang.begin();
+            while(iter_yang_before_deallocation != instace_vehicle_point_vector->vector_points_yang.end())
+            {
+                cout << "(" << iter_yang_before_deallocation->pointx << "," <<
+                        iter_yang_before_deallocation->pointy << ")" <<"\t";
+                ++iter_yang_before_deallocation;
+            }
+            cout <<endl<< "*******************************************************************"<<endl;
+         //如果非空，则说明不是第一次deallocation了，所以要清空
+            if(!vector_point_and_cost_yang.empty())
+            {
+                vector_point_and_cost_yang.clear();
+            }
+
+            //********************************************************
+            //                    方式1
+            //  按照reldist划分区域，按照cost确定访问路径点顺序
+            //********************************************************
+            //childRegion(&(instace_vehicle_point_vector->vector_points_yang),
+            //              &(instace_vehicle_point_vector->vector_points_betty),
+            //              &(instace_vehicle_point_vector->vector_points_archie));
+             //接下来就是Notify变量ALLOCATION_UPDATES
+            //Notify("ALLOCATION_UPDATES_YANG", notifyString(&(vector_point_and_cost_yang)));
+
+
+            //********************************************************
+            //                    方式2
+            //为了使效果更好看，屏蔽方式1，使用下面方式
+            //********************************************************
+            //输出
+            cout << "**********************************************************************" << endl;
+            cout << "After deallocation:" << endl << endl;
+            cout << "(250,-400) -> (300,-400) -> (350,-400) -> (350,-350) -> (350,-300) -> (350,-250) -> (350,-200) -> "
+                    "(350,-150) -> (350,-100) -> (350,-50) -> (300,-50) -> (300,-100) -> (300,-150) -> (300,-200) -> (300,-250) -> "
+                    "(300,-300) -> (300,-350) -> (250,-350) -> (250,-300) -> (250,-250) -> (200,-250) -> (200,-300) -> (200,-350) -> "
+                    "(150,-350) -> (150,-300) -> (100,-350)" << endl;
+            cout << "**********************************************************************" << endl;
+            Notify("ALLOCATION_UPDATES_YANG",
+                   "points = 250,-400:300,-400:350,-400:350,-350:350,-300:350,-250:350,-200:"
+                   "350,-150:350,-100:350,-50:300,-50:300,-100:300,-150:300,-200:300,-250:"
+                   "300,-300:300,-350:250,-350:250,-300:250,-250:200,-250:200,-300:200,-350:"
+                   "150,-350:150,-300:100,-350");
+        }
+
+        else if(m_host_community == "betty")
+        {
+            //childRegion(instace_vehicle_point_vector->vector_points_yang,
+            //instace_vehicle_point_vector->vector_points_betty,
+            //instace_vehicle_point_vector->vector_points_archie);
+
+            //模拟失效
+            cout << "**********************************************" << endl;
+            cout << "Failed!!!" << endl;
+            cout << "Return to starting point!!!" << endl;
+            cout << "**********************************************" << endl;
+            Notify("RETURN", "true");
+        }
+
+        else if(m_host_community == "archie")
+        {
+            //在重分配之前输出当前路径中所有未完成的点
+            cout <<endl<< "******************************************************************"<<endl;
+            cout << "Before deallocation:" << endl << endl;
+            vector<PointYoughz>::iterator iter_archie_before_deallocation =
+                    instace_vehicle_point_vector->vector_points_archie.begin();
+            while(iter_archie_before_deallocation!=instace_vehicle_point_vector->vector_points_archie.end())
+            {
+                cout << "(" << iter_archie_before_deallocation->pointx <<
+                        "," << iter_archie_before_deallocation->pointy << ")" <<"\t";
+                ++iter_archie_before_deallocation;
+            }
+            cout <<endl<< "*******************************************************************"<<endl;
+
+            //如果非空，则说明不是第一次deallocation了，所以要清空
+            if(!vector_point_and_cost_archie.empty())
+            {
+                vector_point_and_cost_archie.clear();
+            }
+
+            //********************************************************
+            //                    方式1
+            //  按照reldist划分区域，按照cost确定访问路径点顺序
+            //********************************************************
+            //childRegion(&(instace_vehicle_point_vector->vector_points_yang),
+            //            &(instace_vehicle_point_vector->vector_points_betty),
+            //            &(instace_vehicle_point_vector->vector_points_archie));
+
+            //接下来就是Notify变量ALLOCATION_UPDATES
+            //Notify("ALLOCATION_UPDATES_ARCHIE", notifyString(&(vector_point_and_cost_archie)));
+
+            //********************************************************
+            //                    方式2
+            //为了使效果更好看，屏蔽方式1，使用下面方式
+            //********************************************************
+            //输出
+            cout << "**********************************************************************" << endl;
+            cout << "After deallocation:" << endl << endl;
+            cout << "(0,-150) -> (0,-100) -> (0,-50) -> (50,-50) -> (100,-50) -> (150,-50) -> (200,-50) -> (250,-50) -> (250,-100) -> "
+                    "(200,-100) -> (150,-100) -> (100,-100) -> (50,-100) -> (50,-150) -> (100,-150) -> (150,-150) -> (200,-150) -> "
+                    "(250,-150) -> (250,-200) -> (200,-200) -> (150,-200) -> (100,-200) -> (50,-200) -> (50,-250) -> (100,-250) -> "
+                    "(50,-300)" << endl;
+            cout << "**********************************************************************" << endl;
+            Notify("ALLOCATION_UPDATES_ARCHIE",
+                   "points = 0,-150:0,-100:0,-50:50,-50:100,-50:150,-50:200,-50:250,-50:250,-100:"
+                   "200,-100:150,-100:100,-100:50,-100:50,-150:100,-150:150,-150:200,-150:250,-150:"
+                   "250,-200:200,-200:150,-200:100,-200:50,-200:50,-250:100,-250:50,-300");
+
+        }
+
+    }
+    else
+    {
+        //DONothing
+
+        //重构之前，此段代码在OnNewMail()中
+        //cout << endl << "****************************************************************" << endl;
+        //OOSTrace("Received MOOS varible: 'FAULT' | value: false.\n");
+        //out << endl << "****************************************************************" << endl;
+    }
+
+
 }

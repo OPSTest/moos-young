@@ -77,6 +77,11 @@ private:
     std::string notifyString( std::vector<PointAndCost> *vector_vehicle_final_path );
     std::string convertDouble(double value);
 
+    std::string valueOfKey;
+
+    void deallocationAlgrithm( std::string valueOfKey );
+
+    bool needDeallocation;
 protected:
     //No protected members
 };
