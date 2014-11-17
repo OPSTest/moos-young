@@ -14,20 +14,20 @@ LongOrigin = -71.08745
 Processconfig = ANTLER
 {
   MSBetweenLaunches = 100
-   
+
   Run = MOOSDB             @ NewConsole = false
   Run = uSimMarine         @ NewConsole = false
   Run = pLogger            @ NewConsole = false
   Run = pNodeReporter      @ NewConsole = false
   Run = pMarinePID         @ NewConsole = false
   Run = pHelmIvP           @ NewConsole = false
-  Run = uProcessWatch      @ NewConsole = false 
+  Run = uProcessWatch      @ NewConsole = false
 
   Run = pShare             @ NewConsole = false
   Run = pHostInfo          @ NewConsole = false
   Run = uFldNodeBroker     @ NewConsole = false
   Run = uFldMessageHandler @ NewConsole = false
-  Run = uFldHazardMgr      @ NewConsole = false 
+  Run = uFldHazardMgr      @ NewConsole = false
 
   //运行yAllocation,不需要配置块
   Run = yAllocation        @ NewConsole = true
@@ -59,7 +59,7 @@ ProcessConfig = uFldNodeBroker
 }
 
 //---------------------------------------------------------
-// pShare Config Block  (Created from Plugin)
+// pShare Config Block
 
 ProcessConfig = pShare
 {
@@ -71,19 +71,19 @@ ProcessConfig = pShare
 }
 
 //--------------------------------------------------
-// pHostInfo configuration block from plugin
+// pHostInfo
 
 ProcessConfig = pHostInfo
 {
-  AppTick 	= 1
-  CommsTick 	= 1
+  AppTick = 1
+  CommsTick = 1
 
   DEFAULT_HOSTIP = localhost
 }
 
 
 //--------------------------------------------------
-// uFldMessageHandler configuration block from plugin
+// uFldMessageHandler
 
 ProcessConfig = uFldMessageHandler
 {
@@ -94,7 +94,7 @@ ProcessConfig = uFldMessageHandler
 }
 
 //--------------------------------------------------
-// uFldHazardMgr configuration block from plugin
+// uFldHazardMgr
 
 ProcessConfig = uFldHazardMgr
 {
@@ -107,7 +107,7 @@ ProcessConfig = uFldHazardMgr
 }
 
 //------------------------------------------------------
-// uSimMarine Configuration Block  (Created from plugin)
+// uSimMarine
 
 ProcessConfig = uSimMarine
 {
@@ -130,7 +130,7 @@ ProcessConfig = uSimMarine
 }
 
 //----------------------------------------------------
-// pHelmIvP Configuration Block  (Created from Plugin)
+// pHelmIvP
 
 ProcessConfig = pHelmIvP
 {
@@ -147,29 +147,29 @@ ProcessConfig = pHelmIvP
 }
 
 //-----------------------------------------------------
-// pMarinePID Configuration Block (created from plugin)
+// pMarinePID Configuration Block
 
 ProcessConfig = pMarinePID
 {
   AppTick    = 10
   CommsTick  = 10
-  
+
   VERBOSE       = true
   DEPTH_CONTROL = false
   ACTIVE_START  = true
-  
+
   // Yaw PID controller
   YAW_PID_KP             = 0.4
   YAW_PID_KD             = 0.1
   YAW_PID_KI             = 0.0
   YAW_PID_INTEGRAL_LIMIT = 0.07
-  
+
   // Speed PID controller
   SPEED_PID_KP           = 1.0
   SPEED_PID_KD           = 0.0
   SPEED_PID_KI           = 0.0
   SPEED_PID_INTEGRAL_LIMIT = 0.07
-  
+
   //Pitch PID controller
   PITCH_PID_KP                   = 0.5
   PITCH_PID_KD                   = 1.0
@@ -188,20 +188,20 @@ ProcessConfig = pMarinePID
   // Maximums
   MAXRUDDER  = 100
   MAXTHRUST  = 100
-  
+
   // A non-zero SPEED_FACTOR overrides use of SPEED_PID
   // Will set DESIRED_THRUST = DESIRED_SPEED * SPEED_FACTOR
   SPEED_FACTOR = 20
 }
 
 //--------------------------------------------------
-// pLogger Configuration Block (Created from Plugin)
+// pLogger Configuration Block
 
 ProcessConfig = pLogger
 {
   AppTick 	= 5
   CommsTick 	= 5
-  
+
   File		= LOG_YANG
   PATH		= ./
   SyncLog 	= true @ 0.2
@@ -211,7 +211,7 @@ ProcessConfig = pLogger
   Log = IVPHELM_LIFE_EVENT @ 0 nosync
 
   // Log it all!!!!!
-  WildCardLogging = true 
+  WildCardLogging = true
   WildCardOmitPattern = *_STATUS
   LogAuxSrc = true
 }
@@ -225,7 +225,7 @@ ProcessConfig = pNodeReporter
 }
 
 //--------------------------------------------------------
-// uProcessWatch Configuration Block (Created from Plugin)
+// uProcessWatch Configuration Block
 
 //14.5.24
 //uprocessWatch作为监视各个运行的application状态的一个应用，
