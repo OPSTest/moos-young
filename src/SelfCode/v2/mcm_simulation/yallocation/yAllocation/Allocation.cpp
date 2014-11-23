@@ -6,7 +6,7 @@
 #include <math.h>
 #include <algorithm>
 
-#include "/home/haizhi/moos-ivp/include/ivp/MBUtils.h"
+#include "MBUtils.h"
 #include "Allocation.h"
 
 using namespace std;

@@ -15,7 +15,7 @@ find_package(MOOSGeodesy)
 include_directories(${MOOSGeodesy_INCLUDE_DIRS})
 link_directories(${MOOSGeodesy_LIBRARY_PATH})
 
-SET(IVP_INCLUDE /home/jerry/moos-ivp/include/ivp)
+SET(IVP_INCLUDE /home/haizhi/moos-ivp/include/ivp)
 include_directories( ${IVP_INCLUDE} )
 
 
