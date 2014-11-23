@@ -6,7 +6,7 @@
 #include <math.h>
 #include <algorithm>
 
-#include "MBUtils.h"
+#include "/home/haizhi/moos-ivp/include/ivp/MBUtils.h"
 #include "Allocation.h"
 
 using namespace std;
@@ -723,15 +723,17 @@ void CAllocation::deallocationAlgrithm(string valueOfKey)
 {
     if( valueOfKey=="true" && needDeallocation==true )
     {
-        cout << endl << "****************************************************************" << endl;
-        MOOSTrace("Received MOOS varible: 'FAULT' | value: true.\n");
-        cout << endl << "****************************************************************" << endl;
+        needDeallocation = false;
 
         //按照当前community的名字选择性发送updates变量
         //m_host_community是从基类继承的变量，从NodeReporter中发现
         //发送的updates变量分别为ALLOCATION_UPDATES_ARCHIE/ALLOCATION_UPDATES_BETTY/ALLOCATION_UPDATES_YANG
         if(m_host_community == "yang")
         {
+            cout << endl << "****************************************************************" << endl;
+            MOOSTrace("There is some error with 'betty', deallocation should be made.");
+            cout << endl << "****************************************************************" << endl;
+
             //在重分配之前输出当前路径中所有未完成的点
             cout <<endl<< "******************************************************************"<<endl;
             cout << "Before deallocation:" << endl << endl;
@@ -796,6 +798,10 @@ void CAllocation::deallocationAlgrithm(string valueOfKey)
 
         else if(m_host_community == "archie")
         {
+            cout << endl << "****************************************************************" << endl;
+            MOOSTrace("There is some error with 'betty', deallocation should be made.");
+            cout << endl << "****************************************************************" << endl;
+
             //在重分配之前输出当前路径中所有未完成的点
             cout <<endl<< "******************************************************************"<<endl;
             cout << "Before deallocation:" << endl << endl;

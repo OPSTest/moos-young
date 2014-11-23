@@ -2,10 +2,10 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctype.h>
-#include "ColorParse.h"
+#include "/home/haizhi/moos-ivp/include/ivp/ColorParse.h"
 #include <iterator>
-#include "MBUtils.h"
-#include "ACTable.h"
+#include "/home/haizhi/moos-ivp/include/ivp/MBUtils.h"
+#include "/home/haizhi/moos-ivp/include/ivp/ACTable.h"
 
 using namespace std;
 
