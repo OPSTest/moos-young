@@ -21,6 +21,5 @@
 
 ### Demo
 
-![strat](https://github.com/younghz/moos-young/blob/master/SRC/SelfCode/v2/mcm_simulation/deallocation_lastest/pic/before_allocation.png)
+![strat](https://github.com/younghz/moos-young/blob/master/src/SelfCode/v2/mcm_simulation/deallocation_lastest/pic/before_allocation.png)
 
-![running](https://github.com/younghz/moos-young/blob/master/SRC/SelfCode/v2/mcm_simulation/deallocation_lastest/pic/after_allocation.png)
